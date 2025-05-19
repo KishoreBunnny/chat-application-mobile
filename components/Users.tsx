@@ -1,5 +1,6 @@
+import { useRouter } from "expo-router"
 import { useState } from "react"
-import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from "react-native"
+import { FlatList, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import UserEdit from "./UserEdit"
 
 
@@ -69,9 +70,11 @@ export default function Users() {
     const [visible,setVisible]=useState(false)
    // const [chat,setChat]=useState(true)
    // const [close,setClose]=useState()
+   const router=useRouter()
 
     return (
         <>
+        <SafeAreaView>
             <View className="flex  flex-row justify-between items-center py-2 px-2 w-full text-zinc-100">
                 <View className="flex-row items-center  gap-2" >
                     <Pressable onPress={()=>setVisible(true)}  >
@@ -90,10 +93,10 @@ export default function Users() {
             <View className="w-full h-full pt-1 pb-20 " >
                 <FlatList
                     data={data}
-                    keyExtractor={(item,index) => (index.toString())}
+                    keyExtractor={(_,index) => (index.toString())}
                     renderItem={({ item }) =>
                     (
-                        <TouchableOpacity onPress={() => { }} className="py-2  " >
+                        <TouchableOpacity onPress={() => { router.push('/(tabs)/user')  }} className="py-2  " >
                             <View className=" p-3 flex-row items-center justify-between w-full h-20 " >
                                 <View className="bg-zinc-500 rounded-full w-[50px] h-[50px]  ">
                                     <Image
@@ -101,11 +104,11 @@ export default function Users() {
                                         source={{ uri: item.img }}
                                     />
                                 </View>
-                                <View className=" w-[75%] h-full  " >
+                                <View className=" w-[70%] h-full  " >
                                     <Text className="text-2xl text-zinc-200 font-semibold  " >{item.name}</Text>
                                     <Text numberOfLines={1} ellipsizeMode="tail" className="text-zinc-500/90 font-medium " >{item.message}</Text>
                                 </View>
-                                <View className="bg-gray-500 rounded-lg w-5 h-10" ><Text className="text-2xl" >...</Text></View>
+                                <Text className="w-13 text-sm text-zinc-500  " >09:55 AM</Text>
 
                             </View>
                         </TouchableOpacity>
@@ -124,7 +127,7 @@ export default function Users() {
             {/* {
                 chat && <Chat/>
             } */}
-           
+           </SafeAreaView>
         </>
     )
 }

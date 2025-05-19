@@ -1,14 +1,10 @@
-import Chat from "@/components/Chat";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Redirect } from "expo-router";
 import "../global.css";
 
-
-
-export default function Index() {
-  return (
-    <SafeAreaView className="flex-1 bg-zinc-950" >
-      {/* <Users/> */}
-      <Chat/>
-    </SafeAreaView>
-  );
+export default function Index(){
+    const isAuthenticated :boolean =false;
+   
+    return(
+       <Redirect href={ "/(auth)/login" }/>
+    )
 }
