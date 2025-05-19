@@ -1,4 +1,5 @@
 
+import { API } from "@/config";
 import axios from "axios";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
@@ -25,7 +26,7 @@ export default function Register() {
         setLoading(true)
         const data = { name, userName, avatar, password };
         try {
-            const res = await axios.post(`${process.env.API}/api/register`, data)
+            const res = await axios.post(`${API}/api/register`, data)
             if (res.data.message === "UserThere" || res.data.message==="UserName already exists" ) {
                return Toast.show({
                     type: 'error', // 'success' | 'error' | 'info'

@@ -1,3 +1,4 @@
+import { API } from "@/config";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { router } from "expo-router";
@@ -11,7 +12,7 @@ export default function AddUser() {
     const [avatar, setAvatar] = useState('')
     const handleAddUser = async () => {
 
-        const res = await axios.post(`${process.env.API}/api/finduser`, { findUser })
+        const res = await axios.post(`${API}/api/finduser`, { findUser })
         if (res.data.message === "no user found") {
             return Toast.show({
                 type: 'error', // 'success' | 'error' | 'info'

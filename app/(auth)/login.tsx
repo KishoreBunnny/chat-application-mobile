@@ -1,10 +1,10 @@
 
+import { API } from "@/config";
 import axios from "axios";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform, Pressable, Text, TextInput, View } from "react-native";
 import Toast from "react-native-toast-message";
-
 
 export default function Login() {
     const [userName, setUserName] = useState('')
@@ -24,8 +24,9 @@ export default function Login() {
         setPassword('')
         const data = { userName, password };
         console.log(data)
+        console.log(process.env.API)
         try {
-            const res = await axios.post(`${process.env.API}/api/login`, data)
+            const res = await axios.post(`${API}/api/login`, data)
         if (res.data.message != 'UserFound') {
             return Toast.show({
                         type: 'error', // 'success' | 'error' | 'info'

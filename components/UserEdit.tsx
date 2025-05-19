@@ -1,3 +1,4 @@
+import { API } from "@/config";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { router } from "expo-router";
@@ -24,7 +25,7 @@ export default function UserEdit({ visible, close, setVisible }: UserEditProps) 
             try {
                 const fetch = async () => {
         
-                    const res = await axios.get(`${process.env.API}/api/user`)
+                    const res = await axios.get(`${API}/api/user`)
                     if (res.data.message === "success")
                         setAvatar(res.data.avatar)
                     setUsername(res.data.username)

@@ -1,4 +1,5 @@
 import UserEdit from "@/components/UserEdit"
+import { API } from "@/config"
 import axios from "axios"
 import { useRouter } from "expo-router"
 import { useEffect, useState } from "react"
@@ -88,8 +89,8 @@ export default function Users() {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const { data } = await axios.get(`${process.env.API}/api/chatusers`)
-                const res=await axios.get(`${process.env.API}/api/user`)
+                const { data } = await axios.get(`${API}/api/chatusers`)
+                const res=await axios.get(`${API}/api/user`)
                 if(res.data.message==="success") setUserAvatar(res.data.avatar)
                 console.log(userAvatar)
                 setUsers(data)
