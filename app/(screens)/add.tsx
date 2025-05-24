@@ -10,12 +10,14 @@ export default function AddUser() {
     const [findUser, setFindUser] = useState('')
     const [username, setUsername] = useState('')
     const [avatar, setAvatar] = useState('')
+
+
     const handleAddUser = async () => {
 
         const res = await axios.post(`${API}/api/finduser`, { findUser })
         if (res.data.message === "no user found") {
             return Toast.show({
-                type: 'error', // 'success' | 'error' | 'info'
+                type: 'error',
                 text1: "No user found",
             });
         }
@@ -24,6 +26,30 @@ export default function AddUser() {
         setAvatar(res.data.avatar)
         setUsername(res.data.userName)
     }
+
+
+    const addChat = async () => {
+
+        console.log("clickec")
+       try {
+         const res = await axios.post(`${API}/api/addchats`, {selectedUser:findUser} )
+         if (res.data.message === "Chat added successfully") {
+            router.push({
+                pathname: "/(screens)/chat",
+                params: { userName: username, img: avatar }
+            })
+        }
+       } catch (error) {
+        console.log(error)
+       }
+        
+
+
+
+    }
+
+
+
     return (
         <View className="w-full h-full bg-zinc-950" >
             <View style={{ marginBottom: 15 }} >
@@ -49,12 +75,7 @@ export default function AddUser() {
                     username &&
                     // <Modal animationType="slide" transparent={true}  >
                     <TouchableOpacity
-                        onPress={() => {
-                            router.push({
-                                pathname: "/(screens)/chat",
-                                params: { userName:username, img:avatar  }
-                            })
-                        }}
+                        onPress={addChat}
                         className="py-2 mt-5 border border-zinc-500 rounded-3xl  " >
                         <View className=" p-3 flex-row items-center gap-3 w-full h-20 " >
                             <View style={{ width: 70, height: 70 }} className="bg-zinc-500 rounded-full">

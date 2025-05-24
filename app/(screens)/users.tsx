@@ -69,9 +69,10 @@ const data = [{
 
 
 type User = {
+  _id?: string | number | (string | number)[] | null | undefined
   username: string;
   avatar: string;
-  // add other fields if necessary
+  id?:string;
 };
 
 
@@ -94,7 +95,7 @@ export default function Users() {
                 if(res.data.message==="success") setUserAvatar(res.data.avatar)
                 console.log(userAvatar)
                 setUsers(data)
-                console.log(data)
+                console.log("users of chat:",data[0]._id)
             } catch (error) {
                 Toast.show({
                     type: 'error', // 'success' | 'error' | 'info'
@@ -144,7 +145,7 @@ export default function Users() {
                         (
                             <TouchableOpacity onPress={() => {
                                 router.push({ pathname: "/(screens)/chat",
-                                params: { userName: item.username, img: item.avatar }
+                                params: { userName: item.username, img: item.avatar,id:item._id}
                                 })
                                     }}
                                     className="py-2  " >

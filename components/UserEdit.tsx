@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { Image, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
+import { Image, Modal, Pressable, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 
 
@@ -44,7 +44,7 @@ export default function UserEdit({ visible, close, setVisible }: UserEditProps) 
 
 
     const handleLogout=async()=>{
-        await axios.get(`${process.env.API}/api/logout`)
+        await axios.get(`${API}/api/logout`)
         router.push("/(auth)/login")
                 Toast.show({
                     type: 'error', // 'success' | 'error' | 'info'
@@ -64,9 +64,9 @@ export default function UserEdit({ visible, close, setVisible }: UserEditProps) 
                                 <Text className="text-zinc-200 text-3xl font-bold " >Profile</Text>
                             </View>
                         </Pressable>
-                        <Pressable onPress={handleLogout} className="p-2 bg-zinc-200 justify-center items-center rounded-xl" >
+                        <TouchableOpacity onPress={handleLogout} className="p-2 bg-zinc-200 justify-center items-center rounded-xl" >
                             <Text className="text-zinc-900 font-bold text-lg " >Logout</Text>
-                        </Pressable>
+                        </TouchableOpacity>
                     </View>
 
 
